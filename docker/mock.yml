@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  mock-server:
+    image: stoplight/prism:latest
+    container_name: mock_weather_server
+    command: 'mock -h 0.0.0.0 -d /app/client.yml'
+    volumes:
+      - ../src/main/resources/openapi:/app
+    ports:
+      - "4010:4010"

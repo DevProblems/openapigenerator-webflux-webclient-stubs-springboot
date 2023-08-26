@@ -1,0 +1,45 @@
+openapi: 3.0.0
+
+info:
+  title: Weather Service Microservice API
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080/api
+    description: Local Server
+
+paths:
+  /weather/location:
+    post:
+      summary: Get weather information by location
+      operationId: weatherByLocation
+      tags:
+        - location
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+      responses:
+        '200':
+          description: Weather information retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WeatherByLocationResponse'
+
+components:
+  schemas:
+    Location:
+      type: object
+      properties:
+        latitude:
+          type: number
+        longitude:
+          type: number
+
+    WeatherByLocationResponse:
+      type: object
+      $ref: "./client.yml#/components/schemas/WeatherInfo"
+
